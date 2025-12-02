@@ -1,0 +1,47 @@
+Full Stack 3D Viewer Implementation Plan
+Implement a 3D viewer with upload capabilities and persistent settings.
+
+Proposed Changes
+Backend (Node.js + Express)
+[NEW] 
+BACKEND/middleware/upload.js
+Configure multer to store files in uploads/ directory.
+Filter for .glb and 
+.gltf
+ files.
+[NEW] 
+BACKEND/models/Settings.js
+Schema: backgroundColor (String), wireframe (Boolean), timestamp (Date).
+[MODIFY] 
+BACKEND/index.js
+Serve uploads folder statically.
+Add routes:
+POST /api/upload: Handle file upload, return URL.
+POST /api/settings: Save viewer settings.
+GET /api/settings: Get latest settings.
+Frontend (React)
+[MODIFY] 
+FRONTEND/src/App.jsx
+State Management: Add state for modelUrl, bgColor, isWireframe.
+Three.js Update:
+Import OrbitControls.
+Update scene background dynamically based on state.
+Traverse scene to update material wireframe property based on state.
+Load model from modelUrl state instead of hardcoded path.
+UI Components:
+Add <input type="file"> for upload.
+Add <input type="color"> for background.
+Add <button> or checkbox for wireframe toggle.
+Add "Save Settings" button.
+API Integration:
+handleUpload: POST file to backend, update modelUrl.
+saveSettings: POST state to backend.
+useEffect: Fetch settings on mount.
+Verification Plan
+Automated Tests
+None.
+Manual Verification
+Upload: Upload a local .glb file. Verify it appears in the viewer.
+Controls: Test Rotate, Zoom, Pan.
+Customization: Change background color and toggle wireframe. Verify visual changes.
+Persistence: Click "Save Settings". Refresh page. Verify settings (color, wireframe) are restored.
