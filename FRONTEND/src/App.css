@@ -1,5 +1,6 @@
+ @import "tailwindcss";
 #root {
-    max-width: 1280px;
+
     margin: 0 auto;
     padding: 0;
     text-align: center;
@@ -8,46 +9,4 @@
 body {
     margin: 0;
     overflow: hidden;
-}
-
-.controls-panel {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    background: rgba(255, 255, 255, 0.9);
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    z-index: 100;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    text-align: left;
-    min-width: 250px;
-}
-
-.control-group {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-
-.control-group label {
-    font-size: 14px;
-    font-weight: bold;
-    color: #333;
-}
-
-button {
-    padding: 8px 16px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-button:hover {
-    background-color: #0056b3;
 }

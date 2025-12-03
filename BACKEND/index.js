@@ -2,10 +2,14 @@
 import dotenv from 'dotenv';
 import express from 'express';
 import cors from 'cors';
-import connectDB from './db/db.js';
-import upload from './middleware/upload.js';
-import Settings from './models/Settings.js';
+import connectDB from './src/db/db.js';
+import upload from './src/middleware/upload.js';
+import settingsRoute from './src/router/settings.route.js';
 import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 dotenv.config();
 
@@ -31,32 +35,7 @@ app.post('/api/upload', upload.single('file'), (req, res) => {
   res.send(`/${req.file.path.replace(/\\/g, '/')}`);
 });
 
-app.post('/api/settings', async (req, res) => {
-  const { backgroundColor, wireframe } = req.body;
-  try {
-    const settings = new Settings({
-      backgroundColor,
-      wireframe,
-    });
-    const createdSettings = await settings.save();
-    res.status(201).json(createdSettings);
-  } catch (error) {
-    res.status(400).json({ message: 'Error saving settings' });
-  }
-});
-
-app.get('/api/settings', async (req, res) => {
-  try {
-    const settings = await Settings.findOne().sort({ timestamp: -1 });
-    if (settings) {
-      res.json(settings);
-    } else {
-      res.json({ backgroundColor: '#dddddd', wireframe: false }); // Default
-    }
-  } catch (error) {
-    res.status(400).json({ message: 'Error fetching settings' });
-  }
-});
+app.use('/api/v1/users', settingsRoute);
 
 const PORT = process.env.PORT || 5000;
 
