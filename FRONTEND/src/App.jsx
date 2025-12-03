@@ -15,7 +15,7 @@ function App() {
   useEffect(() => {
     const fetchSettings = async () => {
       try {
-        const res = await fetch('http://localhost:5000/api/v1/users/settings');
+        const res = await fetch('https://threedmodel-viewer.onrender.com/api/v1/users/settings');
         const data = await res.json();
         if (data) {
           setBackgroundColor(data.backgroundColor);
@@ -58,7 +58,7 @@ function App() {
 
     // Load Model
     const loader = new GLTFLoader();
-    const urlToLoad = modelUrl.startsWith('/') ? `http://localhost:5000${modelUrl}` : modelUrl;
+    const urlToLoad = modelUrl.startsWith('/') ? `https://threedmodel-viewer.onrender.com${modelUrl}` : modelUrl;
     
     const finalUrl = modelUrl === '/scene.gltf' ? '/scene.gltf' : urlToLoad;
 
@@ -138,7 +138,7 @@ function App() {
     formData.append('file', file);
 
     try {
-      const res = await fetch('http://localhost:5000/api/upload', {
+      const res = await fetch('https://threedmodel-viewer.onrender.com/api/upload', {
         method: 'POST',
         body: formData,
       });
@@ -155,7 +155,7 @@ function App() {
 
   const saveSettings = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/v1/users/save_settings', {
+      const res = await fetch('https://threedmodel-viewer.onrender.com/api/v1/users/save_settings', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
