@@ -17,9 +17,17 @@ connectDB();
 
 const app = express();
 
-app.use(cors({
-  origin: 'http://localhost:5173,https://threedmodel-viewer.onrender.com'
-}));
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://3d-model-viewer-git-main-abhiii33s-projects.vercel.app"
+    ],
+    credentials: true,
+  })
+);
+
+
 app.use(express.json())
 
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
